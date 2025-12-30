@@ -238,7 +238,7 @@ Files:
 
 #### Phase 3: Minimal pairs (advanced) (P1)
 
-**Commit 7: MinimalPairNote model + AB discrimination cards (2h)** ☐
+**Commit 7: MinimalPairNote model + AB discrimination cards (2h)** ☑ (4a8235d)
 ```
 feat(anki): add minimal pairs note type matching proven pattern
 
