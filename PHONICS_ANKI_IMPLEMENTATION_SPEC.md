@@ -285,7 +285,7 @@ Files:
 
 #### Phase 5: Tests + docs + polish (P0/P1)
 
-**Commit 11: deterministic regeneration smoke test (1–2h)** ☐
+**Commit 11: deterministic regeneration smoke test (1–2h)** ☑ (9753546)
 ```
 test(anki): add determinism and schema smoke tests
 
