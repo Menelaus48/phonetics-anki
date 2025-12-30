@@ -191,7 +191,7 @@ Files:
 - peters-workspace/phonetics-anki/scripts/curriculum.py (NEW)
 ```
 
-**Commit 3: deterministic ID + GUID strategy (1h)** ☐
+**Commit 3: deterministic ID + GUID strategy (1h)** ☑ (d8b6207)
 ```
 feat(anki): add deterministic ids for models and notes
 
