@@ -201,7 +201,7 @@ Files:
 - peters-workspace/phonetics-anki/scripts/ids.py (NEW)
 ```
 
-**Commit 4: genanki deck builder (sound + pattern notes only) (2h)** ☐
+**Commit 4: genanki deck builder (sound + pattern notes only) (2h)** ☑ (6cacaca)
 ```
 feat(anki): generate apkg for sound/pattern subdecks
 
