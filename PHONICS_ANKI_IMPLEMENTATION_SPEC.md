@@ -263,7 +263,7 @@ Files:
 - peters-workspace/phonetics-anki/cache/.gitkeep (NEW)
 ```
 
-**Commit 9: Google Cloud TTS batch generator (2h)** ☐
+**Commit 9: Google Cloud TTS batch generator (2h)** ☑ (2b0d264)
 ```
 feat(anki): generate word audio via google cloud tts
 
