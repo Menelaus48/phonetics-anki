@@ -6,8 +6,141 @@
   },
   "alphabet": {
     "include_alphabet_decks": true,
-    "letters": [],
-    "confusables": []
+    "letters": [
+      { "id": "letter_a", "upper": "A", "lower": "a", "name": "A", "order": 1 },
+      { "id": "letter_b", "upper": "B", "lower": "b", "name": "B", "order": 2 },
+      { "id": "letter_c", "upper": "C", "lower": "c", "name": "C", "order": 3 },
+      { "id": "letter_d", "upper": "D", "lower": "d", "name": "D", "order": 4 },
+      { "id": "letter_e", "upper": "E", "lower": "e", "name": "E", "order": 5 },
+      { "id": "letter_f", "upper": "F", "lower": "f", "name": "F", "order": 6 },
+      { "id": "letter_g", "upper": "G", "lower": "g", "name": "G", "order": 7 },
+      { "id": "letter_h", "upper": "H", "lower": "h", "name": "H", "order": 8 },
+      { "id": "letter_i", "upper": "I", "lower": "i", "name": "I", "order": 9 },
+      { "id": "letter_j", "upper": "J", "lower": "j", "name": "J", "order": 10 },
+      { "id": "letter_k", "upper": "K", "lower": "k", "name": "K", "order": 11 },
+      { "id": "letter_l", "upper": "L", "lower": "l", "name": "L", "order": 12 },
+      { "id": "letter_m", "upper": "M", "lower": "m", "name": "M", "order": 13 },
+      { "id": "letter_n", "upper": "N", "lower": "n", "name": "N", "order": 14 },
+      { "id": "letter_o", "upper": "O", "lower": "o", "name": "O", "order": 15 },
+      { "id": "letter_p", "upper": "P", "lower": "p", "name": "P", "order": 16 },
+      { "id": "letter_q", "upper": "Q", "lower": "q", "name": "Q", "order": 17 },
+      { "id": "letter_r", "upper": "R", "lower": "r", "name": "R", "order": 18 },
+      { "id": "letter_s", "upper": "S", "lower": "s", "name": "S", "order": 19 },
+      { "id": "letter_t", "upper": "T", "lower": "t", "name": "T", "order": 20 },
+      { "id": "letter_u", "upper": "U", "lower": "u", "name": "U", "order": 21 },
+      { "id": "letter_v", "upper": "V", "lower": "v", "name": "V", "order": 22 },
+      { "id": "letter_w", "upper": "W", "lower": "w", "name": "W", "order": 23 },
+      { "id": "letter_x", "upper": "X", "lower": "x", "name": "X", "order": 24 },
+      { "id": "letter_y", "upper": "Y", "lower": "y", "name": "Y", "order": 25 },
+      { "id": "letter_z", "upper": "Z", "lower": "z", "name": "Z", "order": 26 }
+    ],
+    "confusables": [
+      { "id": "confusable_b_d", "left": "b", "right": "d", "notes": "mirror image" },
+      { "id": "confusable_p_q", "left": "p", "right": "q", "notes": "mirror image" },
+      { "id": "confusable_O_Q", "left": "O", "right": "Q", "notes": "round vs tail" }
+    ]
   },
-  "items": []
+  "items": [
+    {
+      "id": "sound_ae",
+      "type": "sound",
+      "ipa": "/æ/",
+      "sound_label": "short a",
+      "graphemes": ["a"],
+      "examples": [
+        { "word": "apple" },
+        { "word": "ant" },
+        { "word": "alligator" }
+      ],
+      "notes": "short 'a' sound"
+    },
+    {
+      "id": "sound_b",
+      "type": "sound",
+      "ipa": "/b/",
+      "sound_label": "b sound",
+      "graphemes": ["b"],
+      "examples": [
+        { "word": "ball" },
+        { "word": "bat" },
+        { "word": "boy" }
+      ],
+      "notes": "voiced bilabial stop"
+    },
+    {
+      "id": "sound_k",
+      "type": "sound",
+      "ipa": "/k/",
+      "sound_label": "k sound",
+      "graphemes": ["c", "k", "ck"],
+      "examples": [
+        { "word": "cat" },
+        { "word": "kite" },
+        { "word": "cup" }
+      ],
+      "notes": "voiceless velar stop; multiple spellings"
+    },
+    {
+      "id": "sound_s",
+      "type": "sound",
+      "ipa": "/s/",
+      "sound_label": "s sound",
+      "graphemes": ["s", "c"],
+      "examples": [
+        { "word": "sun" },
+        { "word": "sock" },
+        { "word": "seal" }
+      ],
+      "notes": "voiceless alveolar fricative"
+    },
+    {
+      "id": "sound_sh",
+      "type": "sound",
+      "ipa": "/ʃ/",
+      "sound_label": "sh sound",
+      "graphemes": ["sh"],
+      "examples": [
+        { "word": "ship" },
+        { "word": "shell" },
+        { "word": "shy" }
+      ],
+      "notes": "voiceless postalveolar fricative"
+    },
+    {
+      "id": "pattern_th_voiceless",
+      "type": "pattern",
+      "ipa": "/θ/",
+      "graphemes": ["th"],
+      "examples": [
+        { "word": "thin" },
+        { "word": "think" },
+        { "word": "thumb" }
+      ],
+      "notes": "voiceless dental fricative - voiceless 'th'"
+    },
+    {
+      "id": "pattern_th_voiced",
+      "type": "pattern",
+      "ipa": "/ð/",
+      "graphemes": ["th"],
+      "examples": [
+        { "word": "the" },
+        { "word": "this" },
+        { "word": "that" }
+      ],
+      "notes": "voiced dental fricative - voiced 'th'"
+    },
+    {
+      "id": "pattern_ch",
+      "type": "pattern",
+      "ipa": "/tʃ/",
+      "graphemes": ["ch"],
+      "examples": [
+        { "word": "chat" },
+        { "word": "chair" },
+        { "word": "child" }
+      ],
+      "notes": "voiceless postalveolar affricate"
+    }
+  ]
 }
