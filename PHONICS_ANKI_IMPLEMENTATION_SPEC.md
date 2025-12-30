@@ -170,7 +170,7 @@ When implementing a spec:
 
 #### Phase 1: Foundation + Determinism (P0)
 
-**Commit 1: scaffold project directory + docs (45m)** ☐
+**Commit 1: scaffold project directory + docs (45m)** ☑ (d75be75)
 ```
 docs(anki): add phonics anki project scaffold
 
@@ -181,7 +181,7 @@ Files:
 - peters-workspace/phonetics-anki/curriculum.json (NEW)
 ```
 
-**Commit 2: curriculum validation + normalization layer (1–2h)** ☐
+**Commit 2: curriculum validation + normalization layer (1–2h)** ☑ (84c47c9)
 ```
 feat(anki): add curriculum loader and validator
 
@@ -191,7 +191,7 @@ Files:
 - peters-workspace/phonetics-anki/scripts/curriculum.py (NEW)
 ```
 
-**Commit 3: deterministic ID + GUID strategy (1h)** ☐
+**Commit 3: deterministic ID + GUID strategy (1h)** ☑ (d8b6207)
 ```
 feat(anki): add deterministic ids for models and notes
 
@@ -201,7 +201,7 @@ Files:
 - peters-workspace/phonetics-anki/scripts/ids.py (NEW)
 ```
 
-**Commit 4: genanki deck builder (sound + pattern notes only) (2h)** ☐
+**Commit 4: genanki deck builder (sound + pattern notes only) (2h)** ☑ (6cacaca)
 ```
 feat(anki): generate apkg for sound/pattern subdecks
 
@@ -215,7 +215,7 @@ Files:
 
 #### Phase 2: Alphabet decks (P0/P1)
 
-**Commit 5: LetterCaseNote + VisualConfusableNote (1–2h)** ☐
+**Commit 5: LetterCaseNote + VisualConfusableNote (1–2h)** ☑ (0571fa8)
 ```
 feat(anki): add alphabet case + confusables subdecks
 
@@ -225,7 +225,7 @@ Files:
 - peters-workspace/phonetics-anki/scripts/create_anki_deck.py (update)
 ```
 
-**Commit 6: AlphabetOrderNote generator (“what comes next?”) (1–2h)** ☐
+**Commit 6: AlphabetOrderNote generator ("what comes next?") (1–2h)** ☑ (8c3aba2)
 ```
 feat(anki): add alphabet order subdeck
 
@@ -238,7 +238,7 @@ Files:
 
 #### Phase 3: Minimal pairs (advanced) (P1)
 
-**Commit 7: MinimalPairNote model + AB discrimination cards (2h)** ☐
+**Commit 7: MinimalPairNote model + AB discrimination cards (2h)** ☑ (4a8235d)
 ```
 feat(anki): add minimal pairs note type matching proven pattern
 
@@ -252,7 +252,7 @@ Files:
 
 #### Phase 4: Media pipeline (optional integrations) (P2)
 
-**Commit 8: media manifest + local media resolution (1–2h)** ☐
+**Commit 8: media manifest + local media resolution (1–2h)** ☑ (bf11fda)
 ```
 feat(anki): add media resolution and caching manifests
 
@@ -263,7 +263,7 @@ Files:
 - peters-workspace/phonetics-anki/cache/.gitkeep (NEW)
 ```
 
-**Commit 9: Google Cloud TTS batch generator (2h)** ☐
+**Commit 9: Google Cloud TTS batch generator (2h)** ☑ (2b0d264)
 ```
 feat(anki): generate word audio via google cloud tts
 
@@ -273,7 +273,7 @@ Files:
 - peters-workspace/phonetics-anki/scripts/generate_audio.py (NEW)
 ```
 
-**Commit 10: optional image generator integration (2h)** ☐
+**Commit 10: optional image generator integration (2h)** ☑ (8009dd8)
 ```
 feat(anki): add optional image generation pipeline
 
@@ -285,7 +285,7 @@ Files:
 
 #### Phase 5: Tests + docs + polish (P0/P1)
 
-**Commit 11: deterministic regeneration smoke test (1–2h)** ☐
+**Commit 11: deterministic regeneration smoke test (1–2h)** ☑ (9753546)
 ```
 test(anki): add determinism and schema smoke tests
 
@@ -296,7 +296,7 @@ Files:
 - peters-workspace/phonetics-anki/tests/test_curriculum_validation.py (NEW)
 ```
 
-**Commit 12: runbook + “how to iterate safely” docs (45m)** ☐
+**Commit 12: runbook + "how to iterate safely" docs (45m)** ☑ (ee8a3e2)
 ```
 docs(anki): add workflow for regenerating without duplicates
 
