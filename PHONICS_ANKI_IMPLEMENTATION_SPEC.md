@@ -225,7 +225,7 @@ Files:
 - peters-workspace/phonetics-anki/scripts/create_anki_deck.py (update)
 ```
 
-**Commit 6: AlphabetOrderNote generator (“what comes next?”) (1–2h)** ☐
+**Commit 6: AlphabetOrderNote generator ("what comes next?") (1–2h)** ☑ (8c3aba2)
 ```
 feat(anki): add alphabet order subdeck
 
