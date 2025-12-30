@@ -273,7 +273,7 @@ Files:
 - peters-workspace/phonetics-anki/scripts/generate_audio.py (NEW)
 ```
 
-**Commit 10: optional image generator integration (2h)** ☐
+**Commit 10: optional image generator integration (2h)** ☑ (8009dd8)
 ```
 feat(anki): add optional image generation pipeline
 
