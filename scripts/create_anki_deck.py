@@ -23,8 +23,12 @@ from curriculum import load_curriculum, get_items_by_type, CurriculumError
 from ids import (
     MODEL_ID_SOUND,
     MODEL_ID_PATTERN,
+    MODEL_ID_LETTER_CASE,
+    MODEL_ID_VISUAL_CONFUSABLE,
     DECK_NAME_SOUNDS,
     DECK_NAME_SPELLINGS,
+    DECK_NAME_ALPHABET_CASE,
+    DECK_NAME_VISUAL_CONFUSABLES,
     deck_id_for_subdeck,
     note_guid,
 )
@@ -232,6 +236,194 @@ PATTERN_MODEL = genanki.Model(
 )
 
 
+# LetterCaseNote: uppercase/lowercase association
+# Fields: Upper, Lower, LetterName, Audio (placeholder)
+LETTER_CASE_MODEL = genanki.Model(
+    MODEL_ID_LETTER_CASE,
+    "Alphabet Letter Case",
+    fields=[
+        {"name": "Upper"},
+        {"name": "Lower"},
+        {"name": "LetterName"},
+        {"name": "LetterNameAudio"},  # Placeholder for Phase 4
+    ],
+    templates=[
+        {
+            "name": "Upper to Lower",
+            "qfmt": """
+<div class="front">
+    <div class="prompt">What is the lowercase of:</div>
+    <div class="letter upper">{{Upper}}</div>
+</div>
+""",
+            "afmt": """
+{{FrontSide}}
+<hr id="answer">
+<div class="back">
+    <div class="letter lower">{{Lower}}</div>
+</div>
+""",
+        },
+        {
+            "name": "Lower to Upper",
+            "qfmt": """
+<div class="front">
+    <div class="prompt">What is the uppercase of:</div>
+    <div class="letter lower">{{Lower}}</div>
+</div>
+""",
+            "afmt": """
+{{FrontSide}}
+<hr id="answer">
+<div class="back">
+    <div class="letter upper">{{Upper}}</div>
+</div>
+""",
+        },
+    ],
+    css="""
+.card {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+.front {
+    margin-bottom: 20px;
+}
+.prompt {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 20px;
+}
+.letter {
+    font-size: 96px;
+    font-weight: bold;
+    padding: 30px 50px;
+    background-color: white;
+    border-radius: 15px;
+    display: inline-block;
+}
+.letter.upper {
+    color: #E91E63;
+}
+.letter.lower {
+    color: #00BCD4;
+}
+.back {
+    padding: 15px;
+}
+""",
+)
+
+
+# VisualConfusableNote: letter pairs that look similar
+# Fields: Left, Right, Notes, Hint
+VISUAL_CONFUSABLE_MODEL = genanki.Model(
+    MODEL_ID_VISUAL_CONFUSABLE,
+    "Visual Confusable",
+    fields=[
+        {"name": "Left"},
+        {"name": "Right"},
+        {"name": "Notes"},
+        {"name": "Hint"},
+    ],
+    templates=[
+        {
+            "name": "Which is Left",
+            "qfmt": """
+<div class="front">
+    <div class="prompt">Which one is <strong>{{Left}}</strong>?</div>
+    <div class="choices">
+        <span class="choice">{{Left}}</span>
+        <span class="choice">{{Right}}</span>
+    </div>
+</div>
+""",
+            "afmt": """
+<div class="back">
+    <div class="prompt">Which one is <strong>{{Left}}</strong>?</div>
+    <div class="choices">
+        <span class="choice correct">{{Left}}</span>
+        <span class="choice wrong">{{Right}}</span>
+    </div>
+    {{#Hint}}<div class="hint">Hint: {{Hint}}</div>{{/Hint}}
+</div>
+""",
+        },
+        {
+            "name": "Which is Right",
+            "qfmt": """
+<div class="front">
+    <div class="prompt">Which one is <strong>{{Right}}</strong>?</div>
+    <div class="choices">
+        <span class="choice">{{Left}}</span>
+        <span class="choice">{{Right}}</span>
+    </div>
+</div>
+""",
+            "afmt": """
+<div class="back">
+    <div class="prompt">Which one is <strong>{{Right}}</strong>?</div>
+    <div class="choices">
+        <span class="choice wrong">{{Left}}</span>
+        <span class="choice correct">{{Right}}</span>
+    </div>
+    {{#Hint}}<div class="hint">Hint: {{Hint}}</div>{{/Hint}}
+</div>
+""",
+        },
+    ],
+    css="""
+.card {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+.front, .back {
+    margin-bottom: 20px;
+}
+.prompt {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 30px;
+}
+.choices {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+.choice {
+    font-size: 72px;
+    font-weight: bold;
+    padding: 30px 50px;
+    background-color: white;
+    border-radius: 15px;
+    color: #333;
+}
+.choice.correct {
+    background-color: #4CAF50;
+    color: white;
+}
+.choice.wrong {
+    background-color: #f5f5f5;
+    color: #999;
+}
+.hint {
+    font-size: 18px;
+    color: #666;
+    font-style: italic;
+    margin-top: 20px;
+}
+""",
+)
+
+
 # =============================================================================
 # Note Creation
 # =============================================================================
@@ -261,6 +453,30 @@ class PatternNote(genanki.Note):
     def __init__(self, item_id: str, **kwargs):
         super().__init__(**kwargs)
         self._guid = note_guid("pattern", item_id)
+
+
+class LetterCaseNote(genanki.Note):
+    """A note for the Alphabet Letter Case card type."""
+
+    @property
+    def guid(self):
+        return self._guid
+
+    def __init__(self, item_id: str, **kwargs):
+        super().__init__(**kwargs)
+        self._guid = note_guid("letter_case", item_id)
+
+
+class VisualConfusableNote(genanki.Note):
+    """A note for the Visual Confusable card type."""
+
+    @property
+    def guid(self):
+        return self._guid
+
+    def __init__(self, item_id: str, **kwargs):
+        super().__init__(**kwargs)
+        self._guid = note_guid("visual_confusable", item_id)
 
 
 def create_sound_note(item: dict) -> SoundNote:
@@ -310,6 +526,34 @@ def create_pattern_note(item: dict) -> PatternNote:
     )
 
 
+def create_letter_case_note(letter: dict) -> LetterCaseNote:
+    """Create a LetterCaseNote from an alphabet letter entry."""
+    return LetterCaseNote(
+        item_id=letter["id"],
+        model=LETTER_CASE_MODEL,
+        fields=[
+            letter.get("upper", ""),
+            letter.get("lower", ""),
+            letter.get("name", ""),
+            "",  # LetterNameAudio placeholder
+        ],
+    )
+
+
+def create_visual_confusable_note(confusable: dict) -> VisualConfusableNote:
+    """Create a VisualConfusableNote from a confusable entry."""
+    return VisualConfusableNote(
+        item_id=confusable["id"],
+        model=VISUAL_CONFUSABLE_MODEL,
+        fields=[
+            confusable.get("left", ""),
+            confusable.get("right", ""),
+            confusable.get("notes", ""),
+            confusable.get("hint", ""),
+        ],
+    )
+
+
 # =============================================================================
 # Deck Building
 # =============================================================================
@@ -332,6 +576,14 @@ def build_deck(curriculum: dict, output_path: Path) -> None:
         deck_id_for_subdeck(DECK_NAME_SPELLINGS),
         DECK_NAME_SPELLINGS,
     )
+    alphabet_case_deck = genanki.Deck(
+        deck_id_for_subdeck(DECK_NAME_ALPHABET_CASE),
+        DECK_NAME_ALPHABET_CASE,
+    )
+    visual_confusables_deck = genanki.Deck(
+        deck_id_for_subdeck(DECK_NAME_VISUAL_CONFUSABLES),
+        DECK_NAME_VISUAL_CONFUSABLES,
+    )
 
     # Process sound items -> Sounds deck
     sound_items = get_items_by_type(curriculum, "sound")
@@ -345,8 +597,22 @@ def build_deck(curriculum: dict, output_path: Path) -> None:
         note = create_pattern_note(item)
         spellings_deck.add_note(note)
 
+    # Process alphabet letters -> Alphabet Case deck
+    alphabet = curriculum.get("alphabet", {})
+    letters = alphabet.get("letters", [])
+    for letter in letters:
+        note = create_letter_case_note(letter)
+        alphabet_case_deck.add_note(note)
+
+    # Process visual confusables -> Visual Confusables deck
+    confusables = alphabet.get("confusables", [])
+    for confusable in confusables:
+        note = create_visual_confusable_note(confusable)
+        visual_confusables_deck.add_note(note)
+
     # Create the package with all decks
-    package = genanki.Package([sounds_deck, spellings_deck])
+    all_decks = [sounds_deck, spellings_deck, alphabet_case_deck, visual_confusables_deck]
+    package = genanki.Package(all_decks)
 
     # Ensure output directory exists
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -358,6 +624,8 @@ def build_deck(curriculum: dict, output_path: Path) -> None:
     print(f"Deck generated: {output_path}")
     print(f"  Sounds (Core): {len(sound_items)} notes")
     print(f"  Spellings (Graphemes): {len(pattern_items)} notes")
+    print(f"  Alphabet Case: {len(letters)} notes")
+    print(f"  Visual Confusables: {len(confusables)} notes")
 
 
 # =============================================================================
