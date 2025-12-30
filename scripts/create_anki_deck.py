@@ -25,13 +25,16 @@ from ids import (
     MODEL_ID_PATTERN,
     MODEL_ID_LETTER_CASE,
     MODEL_ID_VISUAL_CONFUSABLE,
+    MODEL_ID_ALPHABET_ORDER,
     DECK_NAME_SOUNDS,
     DECK_NAME_SPELLINGS,
     DECK_NAME_ALPHABET_CASE,
+    DECK_NAME_ALPHABET_ORDER,
     DECK_NAME_VISUAL_CONFUSABLES,
     deck_id_for_subdeck,
     note_guid,
 )
+from alphabet_order import generate_alphabet_order_items
 
 
 # =============================================================================
@@ -424,6 +427,78 @@ VISUAL_CONFUSABLE_MODEL = genanki.Model(
 )
 
 
+# AlphabetOrderNote: "What comes next?" sequence cards
+# Fields: Prompt, Answer, Position
+ALPHABET_ORDER_MODEL = genanki.Model(
+    MODEL_ID_ALPHABET_ORDER,
+    "Alphabet Order",
+    fields=[
+        {"name": "Prompt"},
+        {"name": "Answer"},
+        {"name": "Position"},
+    ],
+    templates=[
+        {
+            "name": "What Comes Next",
+            "qfmt": """
+<div class="front">
+    <div class="instruction">What comes next?</div>
+    <div class="sequence">{{Prompt}}</div>
+</div>
+""",
+            "afmt": """
+{{FrontSide}}
+<hr id="answer">
+<div class="back">
+    <div class="answer">{{Answer}}</div>
+</div>
+""",
+        },
+    ],
+    css="""
+.card {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+.front {
+    margin-bottom: 20px;
+}
+.instruction {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 30px;
+}
+.sequence {
+    font-size: 48px;
+    font-weight: bold;
+    font-family: "SF Mono", "Monaco", "Menlo", monospace;
+    letter-spacing: 8px;
+    color: #333;
+    padding: 30px;
+    background-color: white;
+    border-radius: 15px;
+    display: inline-block;
+}
+.back {
+    padding: 15px;
+}
+.answer {
+    font-size: 72px;
+    font-weight: bold;
+    color: #4CAF50;
+    padding: 20px 40px;
+    background-color: white;
+    border-radius: 15px;
+    display: inline-block;
+}
+""",
+)
+
+
 # =============================================================================
 # Note Creation
 # =============================================================================
@@ -477,6 +552,18 @@ class VisualConfusableNote(genanki.Note):
     def __init__(self, item_id: str, **kwargs):
         super().__init__(**kwargs)
         self._guid = note_guid("visual_confusable", item_id)
+
+
+class AlphabetOrderNote(genanki.Note):
+    """A note for the Alphabet Order (What Comes Next?) card type."""
+
+    @property
+    def guid(self):
+        return self._guid
+
+    def __init__(self, item_id: str, **kwargs):
+        super().__init__(**kwargs)
+        self._guid = note_guid("alphabet_order", item_id)
 
 
 def create_sound_note(item: dict) -> SoundNote:
@@ -554,6 +641,19 @@ def create_visual_confusable_note(confusable: dict) -> VisualConfusableNote:
     )
 
 
+def create_alphabet_order_note(item: dict) -> AlphabetOrderNote:
+    """Create an AlphabetOrderNote from an alphabet order item."""
+    return AlphabetOrderNote(
+        item_id=item["id"],
+        model=ALPHABET_ORDER_MODEL,
+        fields=[
+            item.get("prompt", ""),
+            item.get("answer", ""),
+            str(item.get("position", "")),
+        ],
+    )
+
+
 # =============================================================================
 # Deck Building
 # =============================================================================
@@ -579,6 +679,10 @@ def build_deck(curriculum: dict, output_path: Path) -> None:
     alphabet_case_deck = genanki.Deck(
         deck_id_for_subdeck(DECK_NAME_ALPHABET_CASE),
         DECK_NAME_ALPHABET_CASE,
+    )
+    alphabet_order_deck = genanki.Deck(
+        deck_id_for_subdeck(DECK_NAME_ALPHABET_ORDER),
+        DECK_NAME_ALPHABET_ORDER,
     )
     visual_confusables_deck = genanki.Deck(
         deck_id_for_subdeck(DECK_NAME_VISUAL_CONFUSABLES),
@@ -610,8 +714,20 @@ def build_deck(curriculum: dict, output_path: Path) -> None:
         note = create_visual_confusable_note(confusable)
         visual_confusables_deck.add_note(note)
 
+    # Generate alphabet order items -> Alphabet Order deck
+    alphabet_order_items = list(generate_alphabet_order_items(letters, window_size=4))
+    for item in alphabet_order_items:
+        note = create_alphabet_order_note(item)
+        alphabet_order_deck.add_note(note)
+
     # Create the package with all decks
-    all_decks = [sounds_deck, spellings_deck, alphabet_case_deck, visual_confusables_deck]
+    all_decks = [
+        sounds_deck,
+        spellings_deck,
+        alphabet_case_deck,
+        alphabet_order_deck,
+        visual_confusables_deck,
+    ]
     package = genanki.Package(all_decks)
 
     # Ensure output directory exists
@@ -625,6 +741,7 @@ def build_deck(curriculum: dict, output_path: Path) -> None:
     print(f"  Sounds (Core): {len(sound_items)} notes")
     print(f"  Spellings (Graphemes): {len(pattern_items)} notes")
     print(f"  Alphabet Case: {len(letters)} notes")
+    print(f"  Alphabet Order: {len(alphabet_order_items)} notes")
     print(f"  Visual Confusables: {len(confusables)} notes")
 
 
