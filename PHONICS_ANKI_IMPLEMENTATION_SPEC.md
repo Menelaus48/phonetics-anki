@@ -215,7 +215,7 @@ Files:
 
 #### Phase 2: Alphabet decks (P0/P1)
 
-**Commit 5: LetterCaseNote + VisualConfusableNote (1–2h)** ☐
+**Commit 5: LetterCaseNote + VisualConfusableNote (1–2h)** ☑ (0571fa8)
 ```
 feat(anki): add alphabet case + confusables subdecks
 
