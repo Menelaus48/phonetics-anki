@@ -296,7 +296,7 @@ Files:
 - peters-workspace/phonetics-anki/tests/test_curriculum_validation.py (NEW)
 ```
 
-**Commit 12: runbook + “how to iterate safely” docs (45m)** ☐
+**Commit 12: runbook + "how to iterate safely" docs (45m)** ☑ (ee8a3e2)
 ```
 docs(anki): add workflow for regenerating without duplicates
 
