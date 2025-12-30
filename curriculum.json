@@ -141,6 +141,30 @@
         { "word": "child" }
       ],
       "notes": "voiceless postalveolar affricate"
+    },
+    {
+      "id": "minpair_s_vs_sh_sip_ship",
+      "type": "minimal_pair_sound",
+      "contrast_id": "s_vs_sh",
+      "left": { "word": "sip", "ipa": "/sɪp/" },
+      "right": { "word": "ship", "ipa": "/ʃɪp/" },
+      "notes": "s vs sh - imageable, great early contrast"
+    },
+    {
+      "id": "minpair_th_voiceless_vs_voiced_thin_then",
+      "type": "minimal_pair_sound",
+      "contrast_id": "th_voiceless_vs_voiced",
+      "left": { "word": "thin", "ipa": "/θɪn/" },
+      "right": { "word": "then", "ipa": "/ðɛn/" },
+      "notes": "voiceless th vs voiced th"
+    },
+    {
+      "id": "minpair_p_vs_b_pat_bat",
+      "type": "minimal_pair_sound",
+      "contrast_id": "p_vs_b",
+      "left": { "word": "pat", "ipa": "/pæt/" },
+      "right": { "word": "bat", "ipa": "/bæt/" },
+      "notes": "voiceless vs voiced bilabial stop"
     }
   ]
 }

@@ -35,6 +35,7 @@ from ids import (
     note_guid,
 )
 from alphabet_order import generate_alphabet_order_items
+from minimal_pairs import create_minimal_pairs_deck
 
 
 # =============================================================================
@@ -720,6 +721,9 @@ def build_deck(curriculum: dict, output_path: Path) -> None:
         note = create_alphabet_order_note(item)
         alphabet_order_deck.add_note(note)
 
+    # Create minimal pairs deck
+    minimal_pairs_deck, minimal_pairs_count = create_minimal_pairs_deck(curriculum)
+
     # Create the package with all decks
     all_decks = [
         sounds_deck,
@@ -727,6 +731,7 @@ def build_deck(curriculum: dict, output_path: Path) -> None:
         alphabet_case_deck,
         alphabet_order_deck,
         visual_confusables_deck,
+        minimal_pairs_deck,
     ]
     package = genanki.Package(all_decks)
 
@@ -743,6 +748,7 @@ def build_deck(curriculum: dict, output_path: Path) -> None:
     print(f"  Alphabet Case: {len(letters)} notes")
     print(f"  Alphabet Order: {len(alphabet_order_items)} notes")
     print(f"  Visual Confusables: {len(confusables)} notes")
+    print(f"  Minimal Pairs: {minimal_pairs_count} notes")
 
 
 # =============================================================================
