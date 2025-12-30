@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+
+# Local secrets/config
+.env
+.env.*
+
+# Generated Anki artifacts / large assets (keep out of git)
+output/
+assets/
+cache/
