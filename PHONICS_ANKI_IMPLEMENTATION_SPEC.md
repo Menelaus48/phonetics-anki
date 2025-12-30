@@ -252,7 +252,7 @@ Files:
 
 #### Phase 4: Media pipeline (optional integrations) (P2)
 
-**Commit 8: media manifest + local media resolution (1–2h)** ☐
+**Commit 8: media manifest + local media resolution (1–2h)** ☑ (bf11fda)
 ```
 feat(anki): add media resolution and caching manifests
 
