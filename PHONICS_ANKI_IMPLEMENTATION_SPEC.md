@@ -181,7 +181,7 @@ Files:
 - peters-workspace/phonetics-anki/curriculum.json (NEW)
 ```
 
-**Commit 2: curriculum validation + normalization layer (1–2h)** ☐
+**Commit 2: curriculum validation + normalization layer (1–2h)** ☑ (84c47c9)
 ```
 feat(anki): add curriculum loader and validator
 
