@@ -11,12 +11,18 @@ Generates a toddler-friendly Anki deck (`.apkg`) for:
 ### Prerequisites
 
 - Python 3.10+
-- `genanki` library: `pip install genanki`
+- [uv](https://docs.astral.sh/uv/) (recommended) or pip
+
+### Install Dependencies
+
+```bash
+uv pip install -r requirements.txt
+```
 
 ### Generate the Deck
 
 ```bash
-python scripts/create_anki_deck.py
+uv run python scripts/create_anki_deck.py
 ```
 
 Output: `output/phonics_deck.apkg`

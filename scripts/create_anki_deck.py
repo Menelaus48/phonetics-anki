@@ -35,7 +35,7 @@ from ids import (
 # =============================================================================
 
 # SoundNote: phoneme-first card (hear sound -> see examples)
-# Fields: IPA, SoundLabel, Graphemes, FrontExample, AllExamples, Notes
+# Fields: IPA, SoundLabel, Graphemes, FrontExample, AllExamples, Notes, Audio (placeholder)
 SOUND_MODEL = genanki.Model(
     MODEL_ID_SOUND,
     "Phonics Sound",
@@ -46,6 +46,8 @@ SOUND_MODEL = genanki.Model(
         {"name": "FrontExample"},
         {"name": "AllExamples"},
         {"name": "Notes"},
+        {"name": "FrontExampleAudio"},  # Placeholder for Phase 4
+        {"name": "AllExamplesAudio"},   # Placeholder for Phase 4
     ],
     templates=[
         {
@@ -130,7 +132,7 @@ SOUND_MODEL = genanki.Model(
 
 
 # PatternNote: grapheme-first card (see spelling -> hear examples)
-# Fields: Grapheme, IPA, FrontExample, AllExamples, Notes
+# Fields: Grapheme, IPA, FrontExample, AllExamples, Notes, Audio (placeholder)
 PATTERN_MODEL = genanki.Model(
     MODEL_ID_PATTERN,
     "Phonics Pattern",
@@ -140,6 +142,8 @@ PATTERN_MODEL = genanki.Model(
         {"name": "FrontExample"},
         {"name": "AllExamples"},
         {"name": "Notes"},
+        {"name": "FrontExampleAudio"},  # Placeholder for Phase 4
+        {"name": "AllExamplesAudio"},   # Placeholder for Phase 4
     ],
     templates=[
         {
@@ -276,6 +280,8 @@ def create_sound_note(item: dict) -> SoundNote:
             front_example,
             all_examples,
             item.get("notes", ""),
+            "",  # FrontExampleAudio placeholder
+            "",  # AllExamplesAudio placeholder
         ],
     )
 
@@ -298,6 +304,8 @@ def create_pattern_note(item: dict) -> PatternNote:
             front_example,
             all_examples,
             item.get("notes", ""),
+            "",  # FrontExampleAudio placeholder
+            "",  # AllExamplesAudio placeholder
         ],
     )
 
