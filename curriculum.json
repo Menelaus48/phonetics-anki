@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "dialect": "General American",
+    "version": "v1",
+    "description": "Phonics and phonemic awareness curriculum for early literacy"
+  },
+  "alphabet": {
+    "include_alphabet_decks": true,
+    "letters": [],
+    "confusables": []
+  },
+  "items": []
+}
