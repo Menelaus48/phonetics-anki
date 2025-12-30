@@ -170,7 +170,7 @@ When implementing a spec:
 
 #### Phase 1: Foundation + Determinism (P0)
 
-**Commit 1: scaffold project directory + docs (45m)** ☐
+**Commit 1: scaffold project directory + docs (45m)** ☑ (d75be75)
 ```
 docs(anki): add phonics anki project scaffold
 
